@@ -1,24 +1,37 @@
-import logo from './logo.svg';
-import './App.css';
+import logo from "./logo.svg";
+import "./App.css";
+import { GlobalStyles } from "@mui/material";
+import AuthLayout from "./AuthLayout";
+import { Route, Routes, BrowserRouter } from "react-router-dom";
+import CustomCard from "./components/LoginStepper";
+import LoginLayout from "./LoginLayout";
+import Dashboard from "./components/Dashboard";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <GlobalStyles
+        styles={{
+          "@font-face": {
+            fontFamily: "MyCustomFont",
+            src: `url('../src/fonts/p.otf') format('otf')`,
+          },
+        }}
+      />
+
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<AuthLayout />}>
+            <Route index element={<CustomCard />}></Route>
+          </Route>
+        </Routes>
+        <Routes>
+          <Route path="/dashboard" element={<LoginLayout />}>
+            <Route index element={<Dashboard />}></Route>
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
